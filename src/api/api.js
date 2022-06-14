@@ -13,3 +13,17 @@ export function categoryList(params) {
         params
     })
 }
+export function productDetail(params) {
+    return request({
+        url: `/base/product/${params.id}`,
+        method: 'get',
+        params
+    })
+}
+export function productGetImagelist(params) {
+    return request({
+        url: `/base/product/getImagelist`,
+        method: 'get',
+        params
+    })
+}

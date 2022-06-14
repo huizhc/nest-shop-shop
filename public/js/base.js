@@ -3,7 +3,7 @@
     var app = {
         init: function () {
 
-            this.initSwiper();
+            // this.initSwiper();
 
             // this.initNavSlide();
 

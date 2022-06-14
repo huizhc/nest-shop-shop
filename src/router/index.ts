@@ -27,6 +27,33 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/product",
+    redirect: "/product/:id",
+    component: Layout,
+    children: [
+      {
+        path: ":id",
+        component: () => import("../views/product/index.vue"),
+      },
+    ],
+  },
+  {
+    path: "/cart",
+    redirect: "/cart/cart",
+    component: Layout,
+    children: [
+      {
+        path: "cart",
+        component: () => import("../views/cart/cart.vue"),
+      },
+      {
+        path: "success",
+        name: "cart-success",
+        component: () => import("../views/cart/success.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
