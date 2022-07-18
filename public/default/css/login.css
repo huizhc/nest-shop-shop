@@ -4,8 +4,8 @@ a{text-decoration: none;color: #000;}
 img {border: 0; vertical-align:middle;} 
 ul li{list-style: none;}
 body,h1,h2,h3,h4,h5,h6{font: 12px 微软雅黑,Times New Roman;}
-body.login_page{background: rgb(20,33,42)  }
-body.register_page{background: #eee  }
+div.login_page{background: rgb(20,33,42)  }
+div.register_page{background: #eee  }
 /*预定义样式*/
 .w{width: 1000px;margin: 0 auto;}
 .fl{float: left;}

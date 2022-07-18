@@ -12,7 +12,8 @@ module.exports = {
 		port: '8080',
 		proxy: {
 			"/api": {
-				target: "http://localhost:3000",
+				// target: "http://localhost:3000",
+				target: "http://47.111.65.106/api",
 				ws: true,
 				changeOrigin: true,
 				pathRewrite: {
@@ -20,7 +21,8 @@ module.exports = {
 				}
 			},
 			"/upload": {
-				target: "http://localhost:3000/upload",
+				// target: "http://localhost:3000/upload",
+				target: "http://47.111.65.106/upload",
 				ws: true,
 				changeOrigin: true,
 				pathRewrite: {

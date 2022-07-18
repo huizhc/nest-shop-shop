@@ -358,7 +358,7 @@ header .top .right ul li.userinfo ol li a:hover{
 /* 
 .category_item .main  .hot:nth-of-type(5){margin:0;} */
 .category_item .main  .hot .xinpin span{display: block;margin:0 auto;font-size: 10px;line-height:20px;height: 20px;color:#fff;width: 65px;background: #83c44e;text-align: center;}
-.category_item .main  .hot .tu a img{margin:10px 42px 20px 42px; width: 180px;}
+.category_item .main  .hot .tu a img{margin:10px 42px 20px 42px; width: 180px; display: block;}
 .category_item .main  .hot .miaoshu{width: 234px;height: 25px;line-height: 25px;text-align: center;overflow: hidden;}
 .category_item .main  .hot .miaoshu a{color:#000;font-size: 14px;}
 .category_item .main  .hot .jiage{color:#ff6700;font-size: 14px;text-align:center;width: 234px;height: 25px;line-height: 25px;}

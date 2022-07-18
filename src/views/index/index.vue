@@ -2,44 +2,7 @@
 	<template>
   <div>
     <!-- start banner_x -->
-    <div class="banner_x center">
-      <a href="./index.html" target="_blank"><div class="logo fl"></div></a>
-      <a href=""><div class="ad_top fl"></div></a>
-      <div class="nav fl">
-        <ul class="clearfix" id="nav_list">
-          <li v-for="(item, idx) in middleNav" :key="item._id">
-            <a href="#" target="_blank">{{ item.title }}</a>
-            <ol
-              v-if="item.subGoods && item.subGoods.length"
-              class="children-list clearfix"
-            >
-              <li v-for="(item1, idx1) in item.subGoods" :key="item1._id">
-                <a href="#">
-                  <img :src="item1.goods_img" />
-                  <p>{{ item1.shop_price }}</p>
-                </a>
-              </li>
-            </ol>
-          </li>
-        </ul>
-      </div>
-      <div class="search fr">
-        <form action="" method="post">
-          <div class="text fl">
-            <input
-              type="text"
-              class="shuru"
-              placeholder="小米6&nbsp;小米MIX现货"
-            />
-          </div>
-          <div class="submit fl">
-            <input type="submit" class="sousuo" value="搜索" />
-          </div>
-          <div class="clear"></div>
-        </form>
-        <div class="clear"></div>
-      </div>
-    </div>
+    <banner_x :middle_nav="middleNav"></banner_x>
     <!-- end banner_x -->
 
     <!-- start banner_y -->
@@ -57,12 +20,12 @@
               <ol class="cate_list clear">
                 <li v-for="(item1, idx1) in item.items" :key="item1._id">
                   <div class="xuangou_left fl">
-                    <a v-if="item1.link" :href="item1.link" target="_blank">
+                    <router-link v-if="item1.link" :to="item1.link">
                       <div class="img fl">
                         <img :src="item1.cate_img" :alt="item1.title" />
                       </div>
                       <span class="fl"> {{ item1.title }} </span>
-                    </a>
+                    </router-link>
                     <router-link v-else :to="'/category/' + item1._id">
                       <div class="img fl">
                         <img :src="item1.cate_img" :alt="item1.title" />
@@ -327,7 +290,9 @@
 </template>
 <script>
 import { indexData } from "@/api/api";
+import banner_x from '@/components/banner_x'
 export default {
+  components: {banner_x},
   data() {
     return {
       focus: [],

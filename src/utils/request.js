@@ -2,7 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 // import { getToken } from '@/utils/auth'
-
+import router from '@/router'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -22,10 +22,7 @@ service.interceptors.request.use(
     //   config.data = form
     // }
     if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      // config.headers['token'] = getToken()
+      config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('token')// 让每个请求携带自定义token 请根据实际情况自行修改
     }
     return config
   },
@@ -51,25 +48,14 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 200 || !res.success) {
+    if (res && res.code !== 200 || !res.success) {
       Message({
         message: res.message || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
-
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
+      if (res.data.flush || res.data.back) {
+        return Promise.reject(res.data)
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
@@ -83,6 +69,17 @@ service.interceptors.response.use(
       type: 'error',
       duration: 5 * 1000
     })
+    if (error.message === "Request failed with status code 401") {
+      MessageBox.confirm('您还未登录，是否去登录', '提示', {
+        confirmButtonText: '去登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        store.dispatch('resetToken').then(() => {
+          router.push('/pass/login?redirect=' + encodeURIComponent(location.href))
+        })
+      })
+    }
     return Promise.reject(error)
   }
 )
